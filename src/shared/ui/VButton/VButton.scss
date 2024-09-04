@@ -1,0 +1,25 @@
+@import "../../../app/styles/common/mixins";
+
+$Button-Primary-Label: #ffffff;
+$Button-Primary-Normal-Fill: linear-gradient(110.46deg, #70c3ff 12.27%, #4b65ff 93.92%);
+
+.v-button {
+  width: rem(240px);
+  height: rem(48px);
+  background: $Button-Primary-Normal-Fill;
+  border-radius: rem(30px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  border: none;
+  cursor: pointer;
+
+  &__title {
+    font-family: "Inter", sans-serif;
+    font-size: rem(16px);
+    line-height: rem(14px);
+    font-weight: 700;
+    color: $Button-Primary-Label;
+  }
+}
