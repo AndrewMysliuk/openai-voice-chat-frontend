@@ -1,4 +1,4 @@
-import HomePage from "./HomePage"
-import LoginPage from "./LoginPage"
+import RoomPage from "./RoomPage"
+import MainPage from "./MainPage"
 
-export { HomePage, LoginPage }
+export { RoomPage, MainPage }

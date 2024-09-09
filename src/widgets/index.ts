@@ -1,4 +1,4 @@
-import HomeWidget from "./HomeWidget"
-import LoginWidget from "./LoginWidget"
+import RoomWidget from "./RoomWidget"
+import MainWidget from "./MainWidget"
 
-export { HomeWidget, LoginWidget }
+export { RoomWidget, MainWidget }

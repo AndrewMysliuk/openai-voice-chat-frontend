@@ -1,16 +1,13 @@
-import { HomePage, LoginPage } from "@/pages"
-import { IRoute, RouteNames } from "@/shared/types"
+import { MainPage, RoomPage } from "@/pages"
+import { IRoute, RouteNamesEnum } from "@/shared/types"
 
 export const publicRoutes: IRoute[] = [
   {
-    path: RouteNames.LOGIN,
-    element: LoginPage,
+    path: RouteNamesEnum.MAIN,
+    element: MainPage,
   },
-]
-
-export const privateRoutes: IRoute[] = [
   {
-    path: RouteNames.HOME,
-    element: HomePage,
+    path: RouteNamesEnum.ROOM,
+    element: RoomPage,
   },
 ]

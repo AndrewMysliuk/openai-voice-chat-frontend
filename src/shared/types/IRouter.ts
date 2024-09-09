@@ -3,7 +3,7 @@ export interface IRoute {
   element: React.ComponentType
 }
 
-export enum RouteNames {
-  HOME = "/",
-  LOGIN = "/login",
+export enum RouteNamesEnum {
+  MAIN = "/",
+  ROOM = "/room/:id",
 }
