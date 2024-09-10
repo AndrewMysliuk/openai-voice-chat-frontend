@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom"
 import { useWebRTC } from "@/shared/hooks"
+import { VideoContentTypeEnum } from "@/shared/types"
 
 interface ILayoutStyle {
   width: string
@@ -62,7 +63,7 @@ const RoomWidget = () => {
               }}
               autoPlay
               playsInline
-              muted={clientID === "LOCAL_VIDEO"}
+              muted={clientID === VideoContentTypeEnum.LOCAL_VIDEO}
             />
           </div>
         )

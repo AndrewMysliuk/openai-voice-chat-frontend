@@ -9,3 +9,18 @@ export enum SocketActionsEnum {
   ICE_CANDIDATE = "ice-candidate",
   SESSION_DESCRIPTION = "session-description",
 }
+
+export interface ISessionDescription {
+  type: string
+  sdp: string
+}
+
+export interface IIceCandidate {
+  candidate: string
+  sdpMid?: string
+  sdpMLineIndex?: number
+}
+
+export enum VideoContentTypeEnum {
+  LOCAL_VIDEO = "LOCAL_VIDEO",
+}

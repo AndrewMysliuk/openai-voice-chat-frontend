@@ -10,7 +10,13 @@ export const useStateWithCallback = <T>(initialState: T): [T, UpdateState<T>] =>
   const updateState: UpdateState<T> = useCallback((newState, cb) => {
     cbRef.current = cb || null
 
-    setState((prev) => (typeof newState === "function" ? (newState as (prevState: T) => T)(prev) : newState))
+    setState((prevState) => {
+      if (typeof newState === "function") {
+        return (newState as (prevState: T) => T)(prevState)
+      } else {
+        return newState
+      }
+    })
   }, [])
 
   useEffect(() => {
