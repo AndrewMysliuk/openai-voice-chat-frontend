@@ -1,0 +1,74 @@
+@import "../../../app/styles/common/mixins";
+
+.participant-controls {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: rem(24px);
+  padding: rem(12px 0);
+
+  &__btn {
+    width: rem(64px);
+    height: rem(64px);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background: #ffffff;
+    border: 0;
+    outline: 0;
+    position: relative;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: rem(32px);
+      height: rem(32px);
+      margin: rem(-16px 0 0 -16px);
+      background-size: 100% 100%;
+    }
+
+    &.--active {
+      background: #ff4141;
+    }
+
+    &.--microphone {
+      &::before {
+        background-image: url(~@/shared/assets/images/microphone.png);
+      }
+
+      &.--active {
+        &::before {
+          background-image: url(~@/shared/assets/images/microphone-mute.png);
+        }
+      }
+    }
+
+    &.--video {
+      &::before {
+        background-image: url(~@/shared/assets/images/video.png);
+      }
+
+      &.--active {
+        &::before {
+          background-image: url(~@/shared/assets/images/video-mute.png);
+        }
+      }
+    }
+
+    &.--exit {
+      &::before {
+        background-image: url(~@/shared/assets/images/exit.png);
+      }
+    }
+  }
+}

@@ -1,73 +1,50 @@
+import { useMemo } from "react"
 import { useParams } from "react-router-dom"
 import { useWebRTC } from "@/shared/hooks"
 import { VideoContentTypeEnum } from "@/shared/types"
-
-interface ILayoutStyle {
-  width: string
-  height: string
-}
-
-function layout(clientsNumber = 1): ILayoutStyle[] {
-  const pairs = Array.from({ length: clientsNumber }).reduce<ILayoutStyle[][]>((acc, _, index, arr) => {
-    if (index % 2 === 0) {
-      acc.push(arr.slice(index, index + 2) as unknown as ILayoutStyle[])
-    }
-    return acc
-  }, [])
-
-  const rowsNumber = pairs.length
-  const height = `${100 / rowsNumber}%`
-
-  return pairs
-    .map((row, index, arr) => {
-      if (index === arr.length - 1 && row.length === 1) {
-        return [
-          {
-            width: "100%",
-            height,
-          },
-        ]
-      }
-
-      return row.map(() => ({
-        width: "50%",
-        height,
-      }))
-    })
-    .flat()
-}
+import { ParticipantControls } from "@/shared/components"
 
 const RoomWidget = () => {
   const { id: roomId } = useParams<string>()
-  const { clients, provideMediaRef } = useWebRTC(String(roomId))
-  const videoLayout = layout(clients.length)
+  const { clients, provideMediaRef, toggleAudio, toggleVideo, leaveRoom } = useWebRTC(String(roomId))
+
+  const getRoomClass = () => {
+    if (clients.length === 1) return "room --single"
+    if (clients.length === 2) return "room --double"
+    if (clients.length === 3) return "room --triple"
+    if (clients.length >= 4) return "room --quadruple"
+  }
+
+  const localClientID = useMemo(() => {
+    return clients.find((id) => id === VideoContentTypeEnum.LOCAL_VIDEO) ?? null
+  }, [clients])
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexWrap: "wrap",
-        height: "100vh",
-      }}
-    >
-      {clients.map((clientID, index) => {
+    <div className={getRoomClass()}>
+      {clients.map((clientID) => {
         return (
-          <div key={clientID} style={videoLayout[index]} id={clientID}>
+          <div key={clientID} className="room__container" id={clientID}>
             <video
-              width="100%"
-              height="100%"
+              className="room__video"
               ref={(instance) => {
                 provideMediaRef(clientID, instance)
               }}
               autoPlay
               playsInline
-              muted={clientID === VideoContentTypeEnum.LOCAL_VIDEO}
+              muted={clientID === localClientID}
             />
           </div>
         )
       })}
+
+      {localClientID && (
+        <ParticipantControls
+          clientID={localClientID}
+          onMute={() => toggleAudio()}
+          onDisableCamera={() => toggleVideo()}
+          onExitCall={() => leaveRoom()}
+        />
+      )}
     </div>
   )
 }

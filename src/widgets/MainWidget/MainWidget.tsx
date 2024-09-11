@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { socket } from "@/shared/plugins"
 import { SocketActionsEnum } from "@/shared/types"
+import { VButton } from "@/shared/ui"
 import { v4 } from "uuid"
 
 const MainWidget = () => {
@@ -27,21 +28,24 @@ const MainWidget = () => {
 
   return (
     <div className="page" ref={rootNode}>
-      <h1>Available Rooms</h1>
-      <button type="button" onClick={createRoomHandler}>
-        Create New Room
-      </button>
+      <main className="page__container">
+        <div className="page__btn">
+          <VButton title="Create New Room" clickValue={createRoomHandler} />
+        </div>
 
-      <ul>
-        {rooms.map((roomId) => (
-          <li key={roomId}>
-            {roomId}
-            <button type="button" onClick={() => joinRoomHandler(roomId)}>
-              Join Room
-            </button>
-          </li>
-        ))}
-      </ul>
+        <h1 className="page__title">Available Rooms Below</h1>
+
+        <ul className="page__list">
+          {rooms.map((roomId) => (
+            <li className="page__list-point" key={roomId}>
+              <p>
+                <strong>Room:</strong> {roomId}
+              </p>
+              <VButton title="Join Room" clickValue={() => joinRoomHandler(roomId)} />
+            </li>
+          ))}
+        </ul>
+      </main>
     </div>
   )
 }

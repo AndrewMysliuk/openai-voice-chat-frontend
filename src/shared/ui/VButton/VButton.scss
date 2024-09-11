@@ -1,19 +1,28 @@
 @import "../../../app/styles/common/mixins";
 
-$Button-Primary-Label: #ffffff;
-$Button-Primary-Normal-Fill: linear-gradient(110.46deg, #70c3ff 12.27%, #4b65ff 93.92%);
+$Button-Primary-Label: #262626;
+$Button-Primary-Normal-Fill: #ffffff;
+$Button-Primary-Border-Normal-Fill: #262626;
+$Button-Primary-Normal-Hover: rgb(247, 254, 238);
 
 .v-button {
-  width: rem(240px);
-  height: rem(48px);
+  height: rem(40px);
   background: $Button-Primary-Normal-Fill;
-  border-radius: rem(30px);
+  border-radius: rem(8px);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   outline: none;
   border: none;
   cursor: pointer;
+  box-sizing: border-box;
+  padding: rem(0 24px);
+  border: rem(1px solid $Button-Primary-Border-Normal-Fill);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: $Button-Primary-Normal-Hover;
+  }
 
   &__title {
     font-family: "Inter", sans-serif;
